@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<head>
+  <title>Map</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link rel="stylesheet" href="css/stylesheet.css">
+
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
+
+</head>
+<body>
+<h1>Trump Campaign Trail Stops in Florida and Georgia</h1>
+<h2>Click markers to see locations and dates of campaign stops</h2>
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+  crossorigin=""></script>
+
+  <div id="mapid"></div>
+<script src="script/places.js"></script>
+<script>
+
+	var mymap = L.map('mapid').setView([28.794095, -81.722650], 4.74);
+
+	L.tileLayer('https://api.mapbox.com/styles/v1/khill1121/ckialx85658bs19obi731fvlj/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoia2hpbGwxMTIxIiwiYSI6ImNraWFscXM3NjA0ZTAyc211NXM5djV0bDAifQ.F8s3CncN0vDuPHgO1LWN-A', {
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+		id: 'mapbox/satellite-streets-v11',
+		tileSize: 512,
+		zoomOffset: -1,
+    access_token: 'pk.eyJ1Ijoia2hpbGwxMTIxIiwiYSI6ImNraWFscXM3NjA0ZTAyc211NXM5djV0bDAifQ.F8s3CncN0vDuPHgO1LWN-A',
+	}).addTo(mymap);
+  for ( let i = 0; i < places.length; i++ ) {
+    L.marker( [ places[i].latitude, places[i].longitude ] )
+    .bindPopup( '<h3>' + places[i].placeName + '</h3>' + '<p>' + places[i].description + '</p>')
+    .addTo(mymap)
+  }
+
+</script>
+
+<p>Map by Kierra Hill</p>
+<p>In the campaign for the 2020 election both parties heavily focused on gaining support in Florida and Georgia. The map above shows the locations the Trump campaign stopped before the 2020 election.</p>
+
+</body>
+</html>
